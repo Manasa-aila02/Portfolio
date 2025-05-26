@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Built a modern personal portfolio website using **React** and **Vite**, designed to showcase projects, skills, and contact information with smooth animations and an interactive user experience.
+Built a modern personal portfolio website using **MERN Stack**, designed to showcase projects, skills, and contact information with smooth animations and an interactive user experience.
 
 ## Live Demo
 
