@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0f172a;
+  --secondary: #1e293b;
+  --accent: #3b82f6;
+  --text: #f8fafc;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background-color: var(--primary);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-blue-600 text-white rounded-md font-medium transition-all hover:bg-blue-700 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 border border-blue-600 text-blue-600 rounded-md font-medium transition-all hover:bg-blue-600/10;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl font-bold mb-6 gradient-text;
+}
+
+.card {
+  @apply bg-slate-800 rounded-xl p-6 transition-all hover:shadow-xl hover:shadow-blue-500/10;
+}
+
+.nav-link {
+  @apply relative text-slate-300 hover:text-white transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all hover:after:w-full;
+}
+
+.nav-link.active {
+  @apply text-white after:w-full;
+}
