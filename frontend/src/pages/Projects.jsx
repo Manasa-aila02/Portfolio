@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-
+import { API_BASE_URL } from '../components/BaseUrl';
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const Projects = () => {
   useEffect(() => {
     document.title = 'Projects | Aila Manasa';
 
-    fetch(`${import.meta.env.VITE_API_URL}/api/projects`)
+    fetch(`${API_BASE_URL}/api/projects`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch projects');
         return res.json();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download, BookOpen } from "lucide-react";
-
+import { API_BASE_URL } from "../components/BaseUrl";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -28,7 +28,7 @@ const About = () => {
     document.title = "About | My Portfolio";
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`);
+        const response = await fetch(`${API_BASE_URL}/api/profile`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setProfile(data);

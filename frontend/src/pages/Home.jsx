@@ -4,7 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { TypeAnimation } from 'react-type-animation';
 import { Layout, Code, Database, Briefcase } from 'lucide-react';
-
+import { API_BASE_URL } from '../components/BaseUrl';
 const fadeInLeft = {
   hidden: { opacity: 0, x: -50 },
   visible: { opacity: 1, x: 0 },
@@ -51,7 +51,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/profile`);
+        const response = await fetch(`${API_BASE_URL}/api/profile`);
         const data = await response.json();
         setProfile(data);
         document.title = `${data.name} | Portfolio`;
@@ -62,7 +62,7 @@ const Home = () => {
 
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`);
+        const response = await fetch(`${API_BASE_URL}/api/projects`);
         const data = await response.json();
         setProjects(data);
       } catch (error) {
