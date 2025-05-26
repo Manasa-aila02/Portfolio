@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const colors = [
-  "rgba(255, 76, 96, 0.3)",   // translucent red-pink
-  "rgba(255, 213, 107, 0.3)", // translucent yellow
-  "rgba(107, 255, 184, 0.3)", // translucent mint green
-  "rgba(76, 145, 255, 0.3)",  // translucent blue
-  "rgba(212, 107, 255, 0.3)", // translucent purple
+  "rgba(255, 76, 96, 0.3)",
+  "rgba(255, 213, 107, 0.3)",
+  "rgba(107, 255, 184, 0.3)",
+  "rgba(76, 145, 255, 0.3)",
+  "rgba(212, 107, 255, 0.3)",
 ];
 
 const CustomCursor = () => {
@@ -13,8 +13,24 @@ const CustomCursor = () => {
   const requestRef = useRef(null);
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [colorIndex, setColorIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect mobile screen width or touch device
+    const checkMobile = () => {
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth <= 768; // or your breakpoint
+      setIsMobile(isTouch || isSmallScreen);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // don't run animation on mobile
+
     let mouseX = -100;
     let mouseY = -100;
     let currentX = -100;
@@ -39,15 +55,22 @@ const CustomCursor = () => {
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(requestRef.current);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const interval = setInterval(() => {
       setColorIndex((prev) => (prev + 1) % colors.length);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) {
+    // On mobile, render nothing or just return null to disable the cursor
+    return null;
+  }
 
   return (
     <>
